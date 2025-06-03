@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>🍎 HealthFood Vision – Analisis Risiko Makanan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+      background: linear-gradient(to right, #dcedc8, #fff8e1);
+      margin: 0;
+    }
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 18px;
+      max-width: 720px;
+      margin: auto;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    h2 {
+      text-align: center;
+      color: #4caf50;
+      margin-bottom: 30px;
+    }
+    input[type="file"] {
+      display: block;
+      margin: 0 auto 20px auto;
+      font-size: 16px;
+    }
+    button {
+      display: block;
+      margin: auto;
+      padding: 12px 25px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #388e3c;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .result-box {
+      background: #f9fbe7;
+      border-left: 5px solid #8bc34a;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 25px;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>🍽️ HealthFood Vision – Cek Risiko Makananmu!</h2>
+  <form method="POST" enctype="multipart/form-data">
+    <label>Unggah foto makanan:</label>
+    <input type="file" name="gambar" accept="image/*" required>
+    <button type="submit">🔍 Analisis Gizi & Risiko</button>
+  </form>
+
+  {% if image_url %}
+    <h3>📷 Gambar yang Anda Upload:</h3>
+    <img src="{{ image_url }}" alt="Uploaded Food">
+  {% endif %}
+
+  {% if result %}
+    <h3>🧠 Hasil Analisis Kesehatan:</h3>
+    <div class="result-box" id="result-box">{{ result }}</div>
+  {% endif %}
+</div>
+
+<script>
+  // Bold-kan teks **...**
+  const box = document.getElementById("result-box");
+  if (box) {
+    box.innerHTML = box.innerHTML.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+  }
+</script>
+</body>
+</html>
